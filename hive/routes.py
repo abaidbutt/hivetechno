@@ -362,7 +362,7 @@ admin.add_view(FeeSubmit(name='feeSubmit', endpoint='submission'))
 @app.route('/')
 @app.route('/home', methods=['POST', 'GET'])
 def home():
-    return render_template('home.html')
+    return redirect(url_for('register'))
 
 
 # def save_picture(form_picture):
@@ -384,6 +384,9 @@ def photo_save(form_pics, _type):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated and (current_user.id != '0'):
+        return redirect(url_for('login'))
+
     form = RegisterForm()
     fil = RegisterForm(request.files)
     form.course_name.choices = [(str(i.id), str(i.course_name))
