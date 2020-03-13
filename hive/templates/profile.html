@@ -1,0 +1,377 @@
+{% extends "layout.html" %} {% block content %}
+
+<div class="jumbotron text-center">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <table class="table table-striped">
+          <thead>
+          </thead>
+          <tbody>
+                <tr>
+                  
+                  <td class="font-weight-bold">Name</td>
+                  <td scope="col">{{user_details.s_name}}</td>
+                  
+                </tr>
+            <tr>
+              
+              <td class="font-weight-bold">CNIC</td>
+              <td>{{user_details.c_nic}}</td>
+              
+            </tr>
+            <tr>
+              
+              <td class="font-weight-bold">Phone number </td>
+              <td>{{user_details.pp_no}}</td>
+              
+            </tr>
+            
+            <tr>
+              
+              <td class="font-weight-bold">Email </td>
+              <td>{{user_details.email}}</td>
+              
+            </tr>
+            
+          </tbody>
+        </table>
+
+      </div>
+      <div class="col">
+        
+        <img src="{{url_for('static', filename='images/profile_pic/'+user_details.image_file)}}" alt="Bird" class="img-responsive img-circle" width='200' height="200" />
+        <hr /><a class="btn btn-outline-danger btn-btn-primary" href="{{url_for('log_out')}}">Logout</a>
+      </div>
+      <div class="col">
+        <table class="table table-striped">
+          <thead>
+            
+              
+            
+          </thead>
+          <tbody>
+                <tr>
+                  
+                  <td class="font-weight-bold">Roll No</td>
+                  <td scope="col">{{user_details.roll_no}}</td>
+                  
+                </tr>
+            <tr>
+              
+              <td class="font-weight-bold">Degree</td>
+              <td>{{user_details.degree}}</td>
+              
+            </tr>
+            <tr>
+              
+              <td class="font-weight-bold">Institute </td>
+              <td>{{user_details.institute}}</td>
+              
+            </tr>
+            
+            <tr>
+              
+              <td class="font-weight-bold">Address </td>
+              <td>{{user_details.address}}</td>
+              
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+ 
+  </div> 
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a
+          class="nav-link {% if act == 'home' %} active {% endif %} "
+          data-toggle="tab"
+          href="#home"
+          >Home</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link {% if act == 'menu1' %} active {% endif %}"
+          data-toggle="tab"
+          href="#menu1"
+          >Menu 1</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link {% if act == 'password' %} active {% endif %}"
+          data-toggle="tab"
+          href="#password"
+          >password</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Tab panes -->
+<div class="container">
+  <div class="tab-content">
+    <!--  first tab-->
+    <div
+      class="tab-pane container {% if act == 'home' %} active {% endif %}"
+      id="home"
+    >
+      <div id="accordion">
+        {% for en in enroll %}
+        <div class="card">
+          <div class="card-header">
+            <a class="card-link" data-toggle="collapse" href="#c{{en.id}}">
+              {{en.courses.course_name}}
+            </a>
+          </div>
+          
+          <div id="c{{en.id}}" class="collapse fade" data-parent="#accordion">
+            <div class="card-body">
+              {% if en.paid_installments !=-1 %}
+              <table class="table table-striped">
+                <thead>
+                </thead>
+                <tbody>
+                      <tr>
+                        
+                        <td class="font-weight-bold">Total Fees</td>
+                        <td scope="col">{{en.total_fee}}</td>
+                        
+                      </tr>
+                  <tr>
+                    
+                    <td class="font-weight-bold">Paid Fees</td>
+                    <td>{{en.paid_fee}}</td>
+                    
+                  </tr>
+                  <tr>
+                    
+                    <td class="font-weight-bold">Total Installment </td>
+                    <td>{{en.installment}}</td>
+                    
+                  </tr>
+                  
+                  <tr>
+                    
+                    <td class="font-weight-bold">Paid Installment </td>
+                    <td>{{en.paid_installments}}</td>
+                    
+                  </tr>
+                  
+                </tbody>
+              </table>
+              {% else %}
+              <h3>Your request has been pending</h3>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        
+
+        
+      </div>
+    </div>
+    <!-- second tab -->
+    <div
+      class="tab-pane container {% if act == 'menu1' %} active {% endif %}"
+      id="menu1"
+    >
+      <div class="row">
+        <div class="col">
+          <form action="" method="post">
+            {{enroll_form.csrf_token}}
+            <div class="form-gorup">
+              {{enroll_form.course_name.label(class='form-control-label')}}
+              {{enroll_form.course_name(class='form-control form-control-lg')}}
+            </div>
+            <div class="form-gorup">
+              {{enroll_form.course_fee.label(class='form-control-label
+              inability')}} {{enroll_form.course_fee(class='form-control
+              form-control-lg inability', disabled=True )}}
+            </div>
+            <div class="form-gorup">
+              {{enroll_form.course_installments.label(class='form-control-label
+              inability')}} {% if enroll_form.course_installments.errors %}
+              {{enroll_form.course_installments(class='form-control
+              form-control-lg is-invalid inability')}}
+              <div class="invalid-feedback">
+                {% for error in enroll_form.course_installments.errors %}
+                <span>{{error}}</span>
+                {% endfor %}
+              </div>
+              {% else %} {{enroll_form.course_installments(class='form-control
+              form-control-lg inability')}} {% endif %}
+            </div>
+            <div class="form-gorup">
+              {{enroll_form.course_promo.label(class='form-control-label
+              inability')}} {{enroll_form.course_promo(class='form-control
+              form-control-lg inability')}}
+            </div>
+
+            <div class="form-gorup">
+              {{enroll_form.course_discount.label(class='form-control-label
+              inability' , disabled=True )}} {% if
+              enroll_form.course_discount.errors %}
+              {{enroll_form.course_discount(class='form-control form-control-lg
+              is-invalid inability')}}
+              <div class="invalid-feedback">
+                {% for error in enroll_form.course_discount.errors %}
+                <span>{{error}}</span>
+                {% endfor %}
+              </div>
+              {% else %} {{enroll_form.course_discount(class='form-control
+              form-control-lg inability' , disabled=True )}} {% endif %}
+            </div>
+            <div class="form-gorup">
+              {{enroll_form.total_fee.label(class='form-control-label inability'
+              )}} {% if enroll_form.total_fee.errors %}
+              {{enroll_form.total_fee(class='form-control form-control-lg
+              is-invalid inability' , disabled=True)}}
+              <div class="invalid-feedback">
+                {% for error in enroll_form.total_fee.errors %}
+                <span>{{error}}</span>
+                {% endfor %}
+              </div>
+              {% else %} {{enroll_form.total_fee(class='form-control
+              form-control-lg inability' , disabled=True )}} {% endif %}
+            </div>
+            <div class="form-group">
+              {{enroll_form.submit(class='btn btn-primary')}}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- third tab -->
+    <div
+      class="tab-pane container {% if act == 'password' %} active {% endif %}"
+      id="password"
+    >
+      <form method="post" action="">
+        {{ pass_form.csrf_token }}
+        <div class="form-group row">
+          {{ pass_form.old_password.label(class='form-control-label') }}
+          <div class="col-sm-10">
+            {{ pass_form.old_password(class="form-control") }} {% if
+            pass_form.old_password.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in pass_form.old_password.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group row">
+          {{ pass_form.new_password.label(class='form-control-label') }}
+          <div class="col-sm-10">
+            {{ pass_form.new_password(class="form-control") }} {% if
+            pass_form.new_password.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in pass_form.new_password.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group row">
+          {{ pass_form.reenter_password.label(class='form-control-label') }}
+          <div class="col-sm-10">
+            {{ pass_form.reenter_password(class="form-control") }} {% if
+            pass_form.reenter_password.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in pass_form.reenter_password.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="form-group text-right mr-5">
+          {{ pass_form.submit(class='btn btn-primary') }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block scripts %}
+<script>
+  {{super()}}
+  course_name.onchange = function() {
+    //  alert(course_name.value)
+    //  course_name.value=1
+    var x = document.getElementsByClassName("inability");
+    course_fee.value = course_name.value;
+    total_fee.value =
+      parseInt(course_fee.options[course_fee.selectedIndex].text) -
+      (parseInt(course_fee.options[course_fee.selectedIndex].text) *
+        parseInt(course_discount.value)) /
+        100;
+    if (parseInt(course_fee.options[course_fee.selectedIndex].text) === 0) {
+      total_fee.value = 0;
+
+      // for(var i in x){
+      // }
+      // x.forEach((value, index)=>{
+      for (const i of x) {
+        i.style.display = "none";
+      }
+
+      //   value.style.display='none'
+      // })
+    } else {
+      for (const i of x) {
+        i.style.display = "block";
+      }
+    }
+  };
+  course_discount.value = 0;
+  // admit_date.value('setDate', new Date())
+  // admit_date.value = (new Date()).toDateString("MM-dd-yyyy")
+  // admit_date.value = new Date().toLocaleDateString("en-US")
+
+  total_fee.value = course_fee.options[course_fee.selectedIndex].text;
+  course_promo.onchange = function() {
+    fetch("/verify_course_promo/" + course_promo.value).then(res => {
+      res.json().then(data => {
+        // alert(data.count)
+        course_discount.value = data.count;
+        total_fee.value =
+          parseInt(course_fee.options[course_fee.selectedIndex].text) -
+          (parseInt(course_fee.options[course_fee.selectedIndex].text) *
+            parseInt(course_discount.value)) /
+            100;
+        if (course_discount.value == "0") {
+          alert("invalid promocode");
+          course_promo.value = "";
+        } else {
+          alert("successful promocode");
+        }
+      });
+    });
+    //  let disc=(course_fee.value*course_discount.value)/100
+
+    //  total_fee.value=disc
+    // alert(course_promo.value)
+  };
+</script>
+
+{% endblock scripts %}

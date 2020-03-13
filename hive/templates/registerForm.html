@@ -1,0 +1,490 @@
+{% extends 'layout.html' %} 
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid bg-light" style="background:linear-gradient(to right, #78c0db 0%, #68bcad 100%);">
+  <div class="container">
+    <form method="POST" action='/register' enctype="multipart/form-data">
+      {{ form.csrf_token }}
+      <div class="jumbotron jumbotron-fluid text-black">
+        <div class="container">
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Register</legend>
+        
+        <div class="form-gorup">
+          {{form.user_name.label(class='form-control-label')}}
+          {% if form.user_name.errors %}
+          {{form.user_name(class='form-control form-control-lg is-invalid')}}
+          <div class="invalid-feedback">
+            {% for error in form.user_name.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+          {% else %} 
+          {{form.user_name(class='form-control form-control-lg')}}
+           {% endif %}
+        </div>
+        <div class="form-gorup">
+          {{form.father_name.label(class='form-control-label')}}
+          {% if form.father_name.errors %}
+          {{form.father_name(class='form-control form-control-lg is-invalid')}}
+          <div class="invalid-feedback">
+            {% for error in form.father_name.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+          {% else %} 
+          {{form.father_name(class='form-control form-control-lg')}}
+           {% endif %}
+        </div>
+        <div class="form-gorup">
+          {{form.dob.label(class='form-control-label')}}
+          {% if form.dob.errors %}
+          {{form.dob(class='form-control form-control-lg is-invalid')}}
+          <div class="invalid-feedback">
+            {% for error in form.dob.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+          {% else %} 
+          {{form.dob(class='form-control form-control-lg')}}
+           {% endif %}
+        </div>
+        <div class="form-gorup">
+          {{form.cnic.label(class='form-control-label')}}
+          {% if form.cnic.errors %}
+          {{form.cnic(class='form-control form-control-lg is-invalid')}}
+          <div class="invalid-feedback">
+            {% for error in form.cnic.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+          {% else %} 
+          {{form.cnic(class='form-control form-control-lg')}}
+           {% endif %}
+        </div>
+        <div class="form-gorup">
+          {{form.gender.label(class='form-control-label')}}
+          {% if form.gender.errors %}
+          {{form.gender(class='form-control form-control-lg is-invalid')}}
+          <div class="invalid-feedback">
+            {% for error in form.gender.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+          {% else %} 
+          {{form.gender(class='form-control form-control-lg')}}
+           {% endif %}
+        </div>
+        <div class="form-gorup">
+          {{form.admit_date.label(class='form-control-label')}}
+          {% if form.admit_date.errors %}
+          {{form.admit_date(class='form-control form-control-lg is-invalid' , disabled=True)}}
+          <div class="invalid-feedback">
+            {% for error in form.admit_date.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+          {% else %} 
+          {{form.admit_date(class='form-control form-control-lg' , disabled=True )}}
+           {% endif %}
+        </div>
+        <div class="form-gorup">
+          {{form.course_name.label(class='form-control-label')}}
+          <!-- {% if form.course_name.errors %}
+          {{form.course_name(class='form-control form-control-lg is-invalid')}}
+          <div class="invalid-feedback">
+            {% for error in form.course_name.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+          {% else %} 
+          {% endif %} -->
+          {{form.course_name(class='form-control form-control-lg')}}
+        </div>
+        <div class="form-gorup">
+          {{form.course_fee.label(class='form-control-label inability')}}
+          <!-- {% if form.course_fee.errors %}
+          {{form.course_fee(class='form-control form-control-lg is-invalid inability')}}
+          <div class="invalid-feedback">
+            {% for error in form.course_fee.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+          {% else %} 
+          {% endif %} -->
+          {{form.course_fee(class='form-control form-control-lg inability', disabled=True )}}
+        </div>
+        <div class="form-gorup">
+          {{form.course_installments.label(class='form-control-label inability')}}
+          {% if form.course_installments.errors %}
+          {{form.course_installments(class='form-control form-control-lg is-invalid inability')}}
+          <div class="invalid-feedback">
+            {% for error in form.course_installments.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+          {% else %} 
+          {{form.course_installments(class='form-control form-control-lg inability')}}
+           {% endif %}
+        </div>
+        <div class="form-gorup">
+          {{form.course_promo.label(class='form-control-label inability')}}
+          <!-- {% if form.course_promo.errors %}
+          {{form.course_promo(class='form-control form-control-lg is-invalid inability')}}
+          <div class="invalid-feedback">
+            {% for error in form.course_promo.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+          {% else %} 
+          {% endif %} -->
+          {{form.course_promo(class='form-control form-control-lg inability')}}
+        </div>
+        
+        <div class="form-gorup">
+          {{form.course_discount.label(class='form-control-label inability' , disabled=True )}}
+          {% if form.course_discount.errors %}
+          {{form.course_discount(class='form-control form-control-lg is-invalid inability')}}
+          <div class="invalid-feedback">
+            {% for error in form.course_discount.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+          {% else %} 
+          {{form.course_discount(class='form-control form-control-lg inability' , disabled=True  )}}
+           {% endif %}
+        </div>
+        <div class="form-gorup">
+          {{form.total_fee.label(class='form-control-label inability'  )}}
+          {% if form.total_fee.errors %}
+          {{form.total_fee(class='form-control form-control-lg is-invalid inability' , disabled=True)}}
+          <div class="invalid-feedback">
+            {% for error in form.total_fee.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+          </div>
+          {% else %} 
+          {{form.total_fee(class='form-control form-control-lg inability'  , disabled=True )}}
+           {% endif %}
+        </div>
+        
+        
+        
+                
+        </div>
+        </div>
+        <!-- contact detials of the users -->
+        <div class="jumbotron jumbotron-fluid text-black">
+
+            <div class="container">
+              <div class="form-gorup">
+                {{form.personal_no.label(class='form-control-label')}}
+                {% if form.personal_no.errors %}
+                {{form.personal_no(class='form-control form-control-lg is-invalid')}}
+                <div class="invalid-feedback">
+                  {% for error in form.personal_no.errors %}
+                  <span>{{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %} 
+                {{form.personal_no(class='form-control form-control-lg')}}
+                 {% endif %}
+              </div>
+              <div class="form-gorup">
+                {{form.parent_no.label(class='form-control-label')}}
+                {% if form.parent_no.errors %}
+                {{form.parent_no(class='form-control form-control-lg is-invalid')}}
+                <div class="invalid-feedback">
+                  {% for error in form.parent_no.errors %}
+                  <span>{{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %} 
+                {{form.parent_no(class='form-control form-control-lg')}}
+                 {% endif %}
+              </div>
+              <div class="form-gorup">
+                {{form.email.label(class='form-control-label')}}
+                {% if form.email.errors %}
+                {{form.email(class='form-control form-control-lg is-invalid')}}
+                <div class="invalid-feedback">
+                  {% for error in form.email.errors %}
+                  <span>{{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %} 
+                {{form.email(class='form-control form-control-lg')}}
+                 {% endif %}
+              </div>
+              <div class="form-gorup">
+                {{form.address.label(class='form-control-label')}}
+                {% if form.address.errors %}
+                {{form.address(class='form-control form-control-lg is-invalid')}}
+                <div class="invalid-feedback">
+                  {% for error in form.address.errors %}
+                  <span>{{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %} 
+                {{form.address(class='form-control form-control-lg')}}
+                 {% endif %}
+              </div>
+                
+            </div>
+        </div>
+        <!-- academic details  -->
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <div class="form-gorup">
+                {{form.degree.label(class='form-control-label')}}
+                {% if form.degree.errors %}
+                {{form.degree(class='custom-select custom-select-lg form-control form-control-lg is-invalid')}}
+                <div class="invalid-feedback">
+                  {% for error in form.degree.errors %}
+                  <span>{{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %} 
+                {{form.degree(class='custom-select custom-select-lg form-control form-control-lg')}}
+                 {% endif %}
+              </div>
+              <div class="form-gorup">
+                {{form.semester.label(class='form-control-label')}}
+                {% if form.semester.errors %}
+                {{form.semester(class='form-control form-control-lg is-invalid')}}
+                <div class="invalid-feedback">
+                  {% for error in form.semester.errors %}
+                  <span>{{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %} 
+                {{form.semester(class='form-control form-control-lg')}}
+                 {% endif %}
+              </div>
+              <div class="form-gorup">
+                {{form.institute.label(class='form-control-label')}}
+                {% if form.institute.errors %}
+                {{form.institute(class='form-control form-control-lg is-invalid')}}
+                <div class="invalid-feedback">
+                  {% for error in form.institute.errors %}
+                  <span>{{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %} 
+                {{form.institute(class='form-control form-control-lg')}}
+                 {% endif %}
+              </div>
+              <div class="form-gorup">
+                {{form.marks.label(class='form-control-label')}}
+                {% if form.marks.errors %}
+                {{form.marks(class='form-control form-control-lg is-invalid')}}
+                <div class="invalid-feedback">
+                  {% for error in form.marks.errors %}
+                  <span>{{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %} 
+                {{form.marks(class='form-control form-control-lg')}}
+                 {% endif %}
+              </div>
+              <div class="form-gorup">
+                {{form.start_year.label(class='form-control-label')}}
+                {% if form.start_year.errors %}
+                {{form.start_year(class='form-control form-control-lg is-invalid')}}
+                <div class="invalid-feedback">
+                  {% for error in form.start_year.errors %}
+                  <span>{{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %} 
+                {{form.start_year(class='form-control form-control-lg')}}
+                 {% endif %}
+              </div>
+              <div class="form-gorup">
+                {{form.end_year.label(class='form-control-label')}}
+                {% if form.end_year.errors %}
+                {{form.end_year(class='form-control form-control-lg is-invalid')}}
+                <div class="invalid-feedback">
+                  {% for error in form.end_year.errors %}
+                  <span>{{error}}</span>
+                  {% endfor %}
+                </div>
+                {% else %} 
+                {{form.end_year(class='form-control form-control-lg')}}
+                 {% endif %}
+              </div>
+                
+                
+                
+                </div>
+            </div>
+            <!-- note declration -->
+            <div class="jumbotron jumbotron-fluid text-black">
+                <div class="container">
+                  
+                    
+                      <div class="form-gorup">
+                        {{form.profile_picture.label(class='form-control-label')}}
+                        {% if form.profile_picture.errors %}
+                        {{form.profile_picture(class='form-control-file is-invalid')}}
+                        <div class="invalid-feedback">
+                          {% for error in form.profile_picture.errors %}
+                          <span>{{error}}</span>
+                          {% endfor %}
+                        </div>
+                        {% else %} 
+                        {{form.profile_picture(class='form-control-file')}}
+                         {% endif %}
+                      </div>
+                    
+                      <div class="form-gorup">
+                        {{form.cnic_front.label(class='form-control-label mt-3')}}
+                        {% if form.cnic_front.errors %}
+                        {{form.cnic_front(class='form-control-file is-invalid')}}
+                        <div class="invalid-feedback">
+                          {% for error in form.cnic_front.errors %}
+                          <span>{{error}}</span>
+                          {% endfor %}
+                        </div>
+                        {% else %} 
+                        {{form.cnic_front(class='form-control-file')}}
+                         {% endif %}
+                      </div>
+                    
+                      <div class="form-group">
+                        {{form.cnic_back.label(class='form-control-label mt-3')}}
+                        {% if form.cnic_back.errors %}
+                        {{form.cnic_back(class='form-control-file is-invalid')}}
+                        <div class="invalid-feedback">
+                          {% for error in form.cnic_back.errors %}
+                          <span>{{error}}</span>
+                          {% endfor %}
+                        </div>
+                        {% else %} 
+                        {{form.cnic_back(class='form-control-file')}}
+                         {% endif %}
+                      </div>
+                    
+                  
+                  
+                  
+                  
+                    
+                    
+                    
+                    
+                    </div>
+                    </div>
+      </fieldset>
+      <div class="form-group">
+        {{form.submit(class='btn btn-outline-info')}}
+      </div>
+    </form>
+  </div>
+</div>
+{% if form.errors %}
+{{form.errors}}
+{% endif %}
+
+{% endblock content %}
+{% block scripts %}
+<script>
+  
+   {{super()}}
+  
+degree.onchange=function(){
+switch(degree.value){
+  case 'matric':
+  semester.innerHTML='<option value="comp">Completed</option><option value="one">1st</option><option value="two">2nd</option>'
+  
+  
+  break;
+  case 'inter':
+  semester.innerHTML='<option value="comp">Completed</option><option value="one">1st</option><option value="two">2nd</option>'
+  break;
+  case 'graduation':
+  semester.innerHTML='<option value="comp">Completed</option><option value="one">1st</option><option value="two">2nd</option><option value="three">3rd</option><option value="four">4th</option><option value="five">5th</option><option value="six">6th</option><option value="seven">7th</option><option value="eight">8th</option>'
+  break;
+  case 'dae':
+    semester.innerHTML='<option value="comp">Completed</option><option value="one">1st</option><option value="two">2nd</option><option value="three">3rd</option>'
+    
+    break;
+    case 'master':
+      semester.innerHTML='<option value="comp">Completed</option><option value="one">1st</option><option value="two">2nd</option><option value="three">3rd</option><option value="four">4th</option>'
+      
+      break;
+      default:
+        semester.innerHTML=''
+        
+        
+      }
+    }
+    
+    
+    admit_date.value = new Date().toISOString().slice(0,10)
+    
+
+   course_name.onchange=function(){
+    //  alert(course_name.value)
+    //  course_name.value=1
+        var x=document.getElementsByClassName('inability')
+      course_fee.value=course_name.value
+      total_fee.value=parseInt(course_fee.options[course_fee.selectedIndex].text)-((parseInt(course_fee.options[course_fee.selectedIndex].text)*parseInt(course_discount.value))/100)
+      if(parseInt(course_fee.options[course_fee.selectedIndex].text)===0){
+        total_fee.value=0
+        
+        // for(var i in x){
+        // }
+        // x.forEach((value, index)=>{
+        for (const i of x) {
+          
+          
+          i.style.display='none'
+        }
+         
+        //   value.style.display='none'
+        // })
+
+      }else{
+        for (const i of x) {
+          
+          
+          i.style.display='block'
+        }
+
+      }
+
+   }
+course_discount.value=0
+// admit_date.value('setDate', new Date())
+// admit_date.value = (new Date()).toDateString("MM-dd-yyyy")
+// admit_date.value = new Date().toLocaleDateString("en-US")
+
+
+total_fee.value=course_fee.options[course_fee.selectedIndex].text
+course_promo.onchange=function(){
+fetch('/verify_course_promo/'+course_promo.value).then(res=>{
+  res.json().then(data=>{
+    // alert(data.count)
+    course_discount.value=data.count
+    total_fee.value=parseInt(course_fee.options[course_fee.selectedIndex].text)-((parseInt(course_fee.options[course_fee.selectedIndex].text)*parseInt(course_discount.value))/100)
+    if(course_discount.value=='0'){
+      alert('invalid promocode')
+      course_promo.value=''
+    }
+    else{
+      alert('successful promocode')
+    }
+  })
+})
+//  let disc=(course_fee.value*course_discount.value)/100
+
+//  total_fee.value=disc
+// alert(course_promo.value)
+
+}
+
+</script>
+
+
+{% endblock scripts %}

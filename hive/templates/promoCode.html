@@ -1,0 +1,76 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="row">
+  <div class="col-4">
+    {% include 'includes/_sidebar.html' %}
+  </div>
+  <div class="col-8">
+    <div class="jumbotron jumbotron-fluid bg-dark">
+      <div class="container">
+        <form method="POST" action="" >
+          {{form.hidden_tag()}}
+          <div class="jumbotron jumbotron-fluid bg-info">
+            <div class="container">
+              <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Insert Code</legend>
+                <div class="form-gorup">
+                  {{form.code.label(class='form-control-label')}} {% if
+                  form.code.errors %} {{form.code(class='form-control
+                  form-control-lg invalid-feedback')}}
+                  <div class="invalid-feedback">
+                    {% for error in form.code.errors %}
+                    <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %} {{form.code(class='form-control form-control-lg')}}
+                  {% endif %}
+                </div>
+                <div class="form-gorup">
+                  {{form.discount.label(class='form-control-label')}} {% if
+                  form.discount.errors %} {{form.discount(class='form-control
+                  form-control-lg invalid-feedback')}}
+                  <div class="invalid-feedback">
+                    {% for error in form.discount.errors %}
+                    <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %} {{form.discount(class='form-control
+                  form-control-lg')}} {% endif %}
+                </div>
+                <div class="form-gorup">
+                  {{form.promo_status.label(class='form-control-label')}} {% if
+                  form.promo_status.errors %}
+                  {{form.promo_status(class='form-control form-control-lg
+                  invalid-feedback')}}
+                  <div class="invalid-feedback">
+                    {% for error in form.promo_status.errors %}
+                    <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %} {{form.promo_status(class='form-control
+                  form-control-lg')}} {% endif %}
+                </div>
+                <div class="form-gorup">
+                  {{form.count.label(class='form-control-label')}} {% if
+                  form.count.errors %} {{form.count(class='form-control
+                  form-control-lg invalid-feedback')}}
+                  <div class="invalid-feedback">
+                    {% for error in form.count.errors %}
+                    <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %} {{form.count(class='form-control
+                  form-control-lg')}} {% endif %}
+                </div>
+              </fieldset>
+              <div class="form-group">
+                {{form.submit(class='btn btn-info')}}
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

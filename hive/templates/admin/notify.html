@@ -1,0 +1,228 @@
+{% extends 'admin/master.html' %} {%block body %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    
+    <div class="col">
+      <form method="POST" action=''>
+        {{form.csrf_token}}
+        <legend class="text-center mb-3">Pay Student Fee</legend>
+        <hr />
+        <div>
+            {{ form.rollNo.label }} {{ form.rollNo(class="form-control") }} {% if
+              form.rollNo.errors %}
+              <ul class="errors" style="color:red;">
+                {% for error in form.rollNo.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              
+              {% endif %}
+            </div>
+        <div>
+            {{ form.enrollments.label }} {{ form.enrollments(class="form-control") }} {% if
+              form.enrollments.errors %}
+              <ul class="errors" style="color:red;">
+                {% for error in form.enrollments.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              
+              {% endif %}
+            </div>
+        
+        
+        
+    </div>
+</div>
+</div>
+<table class="table table-hover table-responsive">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">{{form.total_fee.label(class='form-control-label')}}</th>
+            
+                <td class="form-gorup">
+                
+                {{form.total_fee(class='form-control form-control-lg',  readonly=True)}}
+                {% if form.total_fee.errors %}
+                <ul class="errors" style='color:rgb(39, 30, 30);'>
+                  {% for error in form.total_fee.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                
+                {% endif %}
+                
+              </td>
+            
+            
+        </tr>
+        <tr>
+            <th scope="row">{{form.paid_fee.label(class='form-control-label')}}</th>
+            
+                <td class="form-gorup">
+                
+                {{form.paid_fee(class='form-control form-control-lg' ,  readonly=True)}}
+                {% if form.paid_fee.errors %}
+                <ul class="errors" style='color:rgb(39, 30, 30);'>
+                  {% for error in form.paid_fee.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                
+                {% endif %}
+                
+              </td>
+            
+            
+        </tr>
+        <tr>
+            <th scope="row">{{form.total_installments.label(class='form-control-label')}}</th>
+            
+                <td class="form-gorup">
+                
+                {{form.total_installments(class='form-control form-control-lg',  readonly=True)}}
+                {% if form.total_installments.errors %}
+                <ul class="errors" style='color:rgb(39, 30, 30);'>
+                  {% for error in form.total_installments.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                
+                {% endif %}
+                
+              </td>
+            
+            
+        </tr>
+        <tr>
+            <th scope="row">{{form.paid_installments.label(class='form-control-label')}}</th>
+            
+                <td class="form-gorup">
+                
+                {{form.paid_installments(class='form-control form-control-lg',  readonly=True)}}
+                {% if form.paid_installments.errors %}
+                <ul class="errors" style='color:rgb(39, 30, 30);'>
+                  {% for error in form.paid_installments.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                
+                {% endif %}
+                
+              </td>
+            
+            
+        </tr>
+        
+    <tr>
+        <th scope="row">{{form.perinsta.label(class='form-control-label')}}</th>
+
+        <td class="form-gorup">
+            {{ form.perinsta(class="form-control") }} {% if
+                form.perinsta.errors %}
+                <ul class="errors" style="color:red;">
+                  {% for error in form.perinsta.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                
+                {% endif %}
+        </td>
+        
+        
+    </tr>
+
+</tbody>
+</table>
+
+<div class="form-group">
+  
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Pay the Fee
+  </button>
+  
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            Are you sure! You want to submit the fee so click pay
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            {{form.submit(class='btn btn-primary')}}
+        </div>
+    </div>
+    </div>
+</div>
+
+
+</div>
+</form>
+
+
+
+<script>
+    var enrollChange=function(){
+        if(enrollments.value==''){
+            total_fee.value=''
+                paid_fee.value=''
+                total_installments.value=''
+                paid_installments.value=''
+                perinsta.value=''
+        }else{
+
+        fetch('/enroll_change/'+enrollments.value).then(res=>{
+            res.json().then(data=>{
+                total_fee.value=data.count.t_fee
+                paid_fee.value=data.count.p_fee
+                total_installments.value=data.count.t_install
+                paid_installments.value=data.count.p_install
+                perinsta.value=data.count.t_fee/data.count.t_install
+            })
+        })
+        }
+    }
+
+  rollNo.onchange = function() {
+      
+    fetch('/get_course_admin/'+rollNo.value).then(res=>{
+        res.json().then(data=>{
+            
+            enrollments.innerHTML=''
+            
+            data.count.forEach(element => {
+                if(element.enroll_id!=0){
+
+                enrollments.add(new Option(element.course_name, element.enroll_id))
+                }
+
+                
+
+            });
+            enrollChange()
+            
+        })
+    })
+  };
+  enrollments.onchange=function(){
+      enrollChange()
+  }
+  
+</script>
+
+{%endblock body %}

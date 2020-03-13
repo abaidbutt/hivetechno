@@ -1,0 +1,438 @@
+{% extends 'layout.html' %} {% block content %}
+
+<div
+  class="jumbotron jumbotron-fluid bg-light"
+  style="background:linear-gradient(to right, #78c0db 0%, #68bcad 100%);"
+>
+  <div class="container">
+    <form method="POST" action="/register" enctype="multipart/form-data">
+      {{ form.csrf_token }}
+      <div class="jumbotron jumbotron-fluid text-black">
+        <div class="container">
+          <legend class="border-bottom mb-4">Register</legend>
+          <div class="form-group">
+            {{ form.user_name.label(class='form-control-label') }} {{
+            form.user_name(class="form-control form-control-lg") }} {% if
+            form.user_name.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.user_name.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.father_name.label(class='form-control-label') }} {{
+            form.father_name(class="form-control form-control-lg") }} {% if
+            form.father_name.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.father_name.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.dob.label(class='form-control-label') }} {{
+            form.dob(class="form-control form-control-lg") }} {% if
+            form.dob.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.dob.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.cnic.label(class='form-control-label') }} {{
+            form.cnic(class="form-control form-control-lg") }} {% if
+            form.cnic.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.cnic.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.gender.label(class='form-control-label') }} {{
+            form.gender(class="form-control form-control-lg") }} {% if
+            form.gender.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.gender.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.admit_date.label(class='form-control-label') }} {{
+            form.admit_date(class="form-control form-control-lg", disabled=True)
+            }} {% if form.admit_date.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.admit_date.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.course_name.label(class='form-control-label') }} {{
+            form.course_name(class="form-control form-control-lg") }} {% if
+            form.course_name.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.course_name.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.course_fee.label(class='form-control-label inability') }} {{
+            form.course_fee(class="form-control form-control-lg inability",
+            disabled=True) }} {% if form.course_fee.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.course_fee.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.course_installments.label(class='form-control-label
+            inability') }} {{ form.course_installments(class="form-control
+            form-control-lg inability") }} {% if form.course_installments.errors
+            %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.course_installments.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.course_promo.label(class='form-control-label inability') }}
+            {{ form.course_promo(class="form-control form-control-lg inability")
+            }} {% if form.course_promo.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.course_promo.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.course_discount.label(class='form-control-label inability')
+            }} {{ form.course_discount(class="form-control form-control-lg
+            inability", disabled=True) }} {% if form.course_discount.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.course_discount.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.total_fee.label(class='form-control-label inability') }} {{
+            form.total_fee(class="form-control form-control-lg inability",
+            disabled=True) }} {% if form.total_fee.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.total_fee.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <!-- contact detials of the users -->
+      <div class="jumbotron jumbotron-fluid text-black">
+        <div class="container">
+          <div class="form-group">
+            {{ form.personal_no.label(class='form-control-label') }} {{
+            form.personal_no(class="form-control form-control-lg") }} {% if
+            form.personal_no.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.personal_no.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.parent_no.label(class='form-control-label') }} {{
+            form.parent_no(class="form-control form-control-lg") }} {% if
+            form.parent_no.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.parent_no.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.email.label(class='form-control-label') }} {{
+            form.email(class="form-control form-control-lg") }} {% if
+            form.email.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.email.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.address.label(class='form-control-label') }} {{
+            form.address(class="form-control form-control-lg") }} {% if
+            form.address.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.address.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <!-- academic details  -->
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <div class="form-group">
+            {{ form.degree.label(class='form-control-label') }} {{
+            form.degree(class="form-control form-control-lg") }} {% if
+            form.degree.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.degree.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.semester.label(class='form-control-label') }} {{
+            form.semester(class="form-control form-control-lg") }} {% if
+            form.semester.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.semester.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.institute.label(class='form-control-label') }} {{
+            form.institute(class="form-control form-control-lg") }} {% if
+            form.institute.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.institute.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.marks.label(class='form-control-label') }} {{
+            form.marks(class="form-control form-control-lg") }} {% if
+            form.marks.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.marks.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.start_year.label(class='form-control-label') }} {{
+            form.start_year(class="form-control form-control-lg") }} {% if
+            form.start_year.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.start_year.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.end_year.label(class='form-control-label') }} {{
+            form.end_year(class="form-control form-control-lg") }} {% if
+            form.end_year.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.end_year.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <!-- note declration -->
+      <div class="jumbotron jumbotron-fluid text-black">
+        <div class="container">
+          <div class="form-group">
+            {{ form.profile_picture.label(class='form-control-label') }} {{
+            form.profile_picture(class="form-control-lg form-control-file") }} {%
+            if form.profile_picture.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.profile_picture.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.cnic_front.label(class='form-control-label') }} {{
+            form.cnic_front(class="form-control-lg form-control-file") }} {% if
+            form.cnic_front.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.cnic_front.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.cnic_back.label(class='form-control-label') }} {{
+            form.cnic_back(class="form-control-lg form-control-file") }} {% if
+            form.cnic_back.errors %}
+            <ul class="errors" style="color:red;">
+              {% for error in form.cnic_back.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{form.submit(class='btn btn-outline-info')}}
+      </div>
+    </form>
+  </div>
+</div>
+{% if form.errors %} {{form.errors}} {% endif %} {% endblock content %} {% block scripts %}
+<script>
+  
+   {{super()}}
+  
+degree.onchange=function(){
+switch(degree.value){
+  case 'matric':
+  semester.innerHTML='<option value="comp">Completed</option><option value="one">1st</option><option value="two">2nd</option>'
+  
+  
+  break;
+  case 'inter':
+  semester.innerHTML='<option value="comp">Completed</option><option value="one">1st</option><option value="two">2nd</option>'
+  break;
+  case 'graduation':
+  semester.innerHTML='<option value="comp">Completed</option><option value="one">1st</option><option value="two">2nd</option><option value="three">3rd</option><option value="four">4th</option><option value="five">5th</option><option value="six">6th</option><option value="seven">7th</option><option value="eight">8th</option>'
+  break;
+  case 'dae':
+    semester.innerHTML='<option value="comp">Completed</option><option value="one">1st</option><option value="two">2nd</option><option value="three">3rd</option>'
+    
+    break;
+    case 'master':
+      semester.innerHTML='<option value="comp">Completed</option><option value="one">1st</option><option value="two">2nd</option><option value="three">3rd</option><option value="four">4th</option>'
+      
+      break;
+      default:
+        semester.innerHTML=''
+        
+        
+      }
+    }
+    
+    
+    admit_date.value = new Date().toISOString().slice(0,10)
+    
+
+   course_name.onchange=function(){
+    //  alert(course_name.value)
+    //  course_name.value=1
+        var x=document.getElementsByClassName('inability')
+      course_fee.value=course_name.value
+      total_fee.value=parseInt(course_fee.options[course_fee.selectedIndex].text)-((parseInt(course_fee.options[course_fee.selectedIndex].text)*parseInt(course_discount.value))/100)
+      if(parseInt(course_fee.options[course_fee.selectedIndex].text)===0){
+        total_fee.value=0
+        
+        // for(var i in x){
+        // }
+        // x.forEach((value, index)=>{
+        for (const i of x) {
+          
+          
+          i.style.display='none'
+        }
+         
+        //   value.style.display='none'
+        // })
+
+      }else{
+        for (const i of x) {
+          
+          
+          i.style.display='block'
+        }
+
+      }
+
+   }
+course_discount.value=0
+// admit_date.value('setDate', new Date())
+// admit_date.value = (new Date()).toDateString("MM-dd-yyyy")
+// admit_date.value = new Date().toLocaleDateString("en-US")
+
+
+total_fee.value=course_fee.options[course_fee.selectedIndex].text
+course_promo.onchange=function(){
+fetch('/verify_course_promo/'+course_promo.value).then(res=>{
+  res.json().then(data=>{
+    // alert(data.count)
+    course_discount.value=data.count
+    total_fee.value=parseInt(course_fee.options[course_fee.selectedIndex].text)-((parseInt(course_fee.options[course_fee.selectedIndex].text)*parseInt(course_discount.value))/100)
+    if(course_discount.value=='0'){
+      alert('invalid promocode')
+      course_promo.value=''
+    }
+    else{
+      alert('successful promocode')
+    }
+  })
+})
+//  let disc=(course_fee.value*course_discount.value)/100
+
+//  total_fee.value=disc
+// alert(course_promo.value)
+
+}
+
+</script>
+
+
+{% endblock scripts %}
