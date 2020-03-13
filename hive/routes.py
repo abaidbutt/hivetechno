@@ -453,7 +453,7 @@ def register():
                 flash(f'Adccount has been created!', 'success')
                 return redirect(url_for('home'))
 
-    return render_template('registeration.html', form=form)
+    return render_template('registration.html', form=form)
 
 
 @app.route('/verify_course_promo/<_code>')
