@@ -6,5 +6,5 @@ if __name__=="__main__":
     # a=str(p.stdout.read())
     # print(p, 'printp')
     # print(a, 'so')
-    # app.run(debug=True, host='192.168.1.111', port=5001)
-    app.run(debug=True)
+    app.run(debug=True, host='192.168.1.111', port=5001)
+    # app.run(debug=True)

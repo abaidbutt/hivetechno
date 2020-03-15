@@ -128,3 +128,12 @@ class Invoices(db.Model):
         self.paid_installments=paid_installments
         
         
+class Abc(db.Model):
+    id=db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.String(30), nullable=False)
+    
+    def __init__(self, name):
+        self.name=name
+        
+        
+        

@@ -7,7 +7,7 @@ from flask_admin.contrib.fileadmin import FileAdmin
 from hive import db, app, admin, login_manager, mail
 from flask_admin.contrib.sqla import ModelView
 from hive.forms import RegisterForm, CheckForm, LoginForm, FeeSubmitForm, PasswordForm, EnrollmentForm
-from hive.models import User, Courses, Promo, Enrollments, Invoices
+from hive.models import User, Courses, Promo, Enrollments, Invoices, Abc
 from werkzeug.utils import secure_filename
 from flask_admin import BaseView, expose
 from markupsafe import Markup
@@ -725,3 +725,11 @@ def profile():
 
         return render_template('profile.html', enroll=enroll, user_details=user_details, pass_form=pass_form, act=act, enroll_form=enroll_form)
     return redirect(url_for('login'))
+
+
+
+@app.route('/abc/<n>', methods=['GET', 'POST'])
+def abc(n):
+    a=Abc(n)
+    db.session.add(a)
+    db.session.commit()

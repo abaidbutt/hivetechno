@@ -5,9 +5,12 @@ from flask_admin import Admin, AdminIndexView
 from flask_login import current_user,LoginManager
 from flask_mail import Mail
 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '81f50e907d84d4370595c16fc8bef7'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://hivetec2_hivetec:hivetecsite@https://hivetechnologies.org:2083/hivetec2_site'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://hivetec2_hivetec:hivetecsite@hivetechnologies.org:2083/hivetec2_site'
 app.config['FLASK_ADMIN_SWATCH'] = 'flatly'
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
@@ -22,8 +25,9 @@ mail = Mail(app)
 #     # app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:butt@localhost/school'
 # else:
 #     app.debug=False
-#     app.config['SQLALCHEMY_DATABASE_URI']='postgres://gnrwyxnwchsdzd:0b87c666c4c2546d1fb91a616bb08b2c212c3f0668bdff07225db7ffe7e642b6@ec2-174-129-255-57.compute-1.amazonaws.com:5432/d2ia3uvabgi19o'
+    # app.config['SQLALCHEMY_DATABASE_URI']='postgres://hivetec2_hivetecsite:hivetecsite@hivetechnologies.org:2083/hivetec2_hivetec2site'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+
 
 class MyAdminIndexView(AdminIndexView):
     def is_accessible(self):
