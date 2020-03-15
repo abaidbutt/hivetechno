@@ -7,7 +7,7 @@ from flask_admin.contrib.fileadmin import FileAdmin
 from hive import db, app, admin, login_manager, mail
 from flask_admin.contrib.sqla import ModelView
 from hive.forms import RegisterForm, CheckForm, LoginForm, FeeSubmitForm, PasswordForm, EnrollmentForm
-from hive.models import User, Courses, Promo, Enrollments, Invoices, Abc
+from hive.models import User, Courses, Promo, Enrollments, Invoices
 from werkzeug.utils import secure_filename
 from flask_admin import BaseView, expose
 from markupsafe import Markup
@@ -540,7 +540,7 @@ def approve():
     user.status = 'approved'
     db.session.add(user)
     msg = Message('HiveTechnology',
-                  sender="bestabaidullahbutt@gmail.com", recipients=[user.email])
+                  sender="hivetechnologies8@gmail.com", recipients=[user.email])
     msg.body = f''' {request.form["approve_mail"]} <br /> Roll No: {user.roll_no} '''
     mail.send(msg)
     db.session.commit()

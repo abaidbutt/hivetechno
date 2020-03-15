@@ -8,7 +8,7 @@ from wtforms.widgets import html5
 import datetime
 from hive import db
 from hive.models import Courses, User
-from wtforms_sqlalchemy.fields import QuerySelectField
+
 from flask_login import current_user
 # _values=[]
 # _choices = []
