@@ -11,8 +11,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['FLASK_ADMIN_SWATCH'] = 'flatly'
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'bestabaidullahbutt@gmail.com'
-app.config['MAIL_PASSWORD'] = 'ansans267@'
+app.config['MAIL_USERNAME'] = 'hivetechnologies8@gmail.com'
+app.config['MAIL_PASSWORD'] = '123@Hive'
 app.config['MAIL_USE_SSL'] = True
 
 mail = Mail(app)

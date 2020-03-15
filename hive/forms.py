@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, RadioField, SelectField, TextAreaField, BooleanField, DecimalField, PasswordField,DateTimeField
 from wtforms.validators import DataRequired, Email, NumberRange, Length, EqualTo, ValidationError, InputRequired, Optional
+from wtforms_validators import Alpha, Integer
 from wtforms.fields.html5 import DateField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.widgets import html5
@@ -27,8 +28,8 @@ from flask_login import current_user
 #     _values.append(_value)
 
 class RegisterForm(FlaskForm):
-    user_name = StringField('Name', validators=[DataRequired()])
-    father_name = StringField('Father Name', validators=[DataRequired()])
+    user_name = StringField('Name', validators=[DataRequired(), Alpha()])
+    father_name = StringField('Father Name', validators=[DataRequired(), Alpha()])
     dob = DateField('Date of Birth', format='%Y-%m-%d')
     cnic=IntegerField('CNIC', widget=html5.NumberInput(), validators=[DataRequired()])
     gender = SelectField('Gender', choices = [('M','Male'),('F','Female'), ('O', 'Other')])
@@ -49,12 +50,12 @@ class RegisterForm(FlaskForm):
     degree=SelectField('Recent Degree', choices = [('matric', 'Matric'),('inter', 'Intermediate'),  ('dae', 'DAE'),('graduation', 'Graduation'), ('master', 'Master')])
     semester=SelectField('Semester/Part',  choices = [ ('comp', 'Completed'),('one', '1st'), ('two', '2nd')])
     institute=StringField('Institute Name', validators=[DataRequired()])
-    marks=DecimalField('Marks/CGPA', validators=[DataRequired()])
-    start_year=StringField('Start Year', widget=html5.NumberInput(), validators=[DataRequired()])
-    end_year=StringField('End Year', widget=html5.NumberInput(), validators=[DataRequired()])
-    profile_picture=FileField('Profile Picture', validators=[FileRequired(), FileAllowed(['jpg', 'png'])])
-    cnic_front=FileField('CNIC Front', validators=[FileRequired(), FileAllowed(['jpg', 'png'])])
-    cnic_back=FileField('CNIC Back', validators=[FileRequired(), FileAllowed(['jpg', 'png'])])
+    marks=DecimalField('Marks/CGPA', validators=[DataRequired()], widget=html5.NumberInput())
+    start_year=StringField('Start Year', validators=[DataRequired(), Integer()])
+    end_year=StringField('End Year', validators=[DataRequired(), Integer()])
+    profile_picture=FileField('Profile Picture', validators=[Optional(), FileAllowed(['jpg', 'png', 'jpeg'])])
+    cnic_front=FileField('CNIC Front', validators=[Optional(), FileAllowed(['jpg', 'png', 'jpeg'])])
+    cnic_back=FileField('CNIC Back', validators=[Optional(), FileAllowed(['jpg', 'png', 'jpeg'])])
     submit=SubmitField('Register')
     def validate_email(self, email):
         user=User.query.filter_by(email=email.data).first()

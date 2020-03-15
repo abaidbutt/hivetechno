@@ -375,11 +375,14 @@ def home():
 #     return picture_fn
 
 
-def photo_save(form_pics, _type):
-    file_name = secure_filename(form_pics.filename)
+def photo_save(form_pics, _type, rollno):
+    # file_name = secure_filename(form_pics.filename)
+    f_name, f_ext=os.path.splitext(form_pics.filename)
+    print(f_name)
     form_pics.save(os.path.join(
-        app.root_path, 'static', 'images', _type, file_name))
-    return form_pics.filename
+        app.root_path, 'static', 'images', _type, rollno+f_ext))
+    print(rollno+f_ext)
+    return rollno+f_ext
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -421,9 +424,6 @@ def register():
             # print(form.end_year.data)
             # user=User(s_name=form.user_name.data, f_name=form.father_name.data, dob=datetime.datetime.strptime(str(form.dob.data), '%Y-%m-%d'), c_nic=form.cnic.data, gender=form.gender.data, admission_date=datetime.datetime.strptime(str(form.admit_date.data), '%Y-%m-%d'), course_name=form.course_name.data, batch=form.batch_no.data, time=str(form.time.data), pp_no=form.personal_no.data, parent_no=form.parent_no.data, email=form.email.data, address=form.address.data, degree=form.degree.data, semester=form.sem.data, institute=form.institute.data, marks=form.marks.data, year=str(form.year.data), image_file=pic_file, cnic_file=cnic_file)
             if fil.cnic_front.data and fil.profile_picture.data and fil.cnic_back.data:
-                pic_file = photo_save(fil.profile_picture.data, 'profile_pic')
-                cnic_front = photo_save(fil.cnic_front.data, 'cnic_front')
-                cnic_back = photo_save(fil.cnic_back.data, 'cnic_back')
                 course = Courses.query.filter_by(
                     id=form.course_name.data).first()
                 promo = Promo.query.filter(
@@ -437,6 +437,9 @@ def register():
                 if promo:
                     totalfee -= ((totalfee*promo.discount)/100)
 
+                pic_file = photo_save(fil.profile_picture.data, 'profile_pic', 'pp'+str(rollNo))
+                cnic_front = photo_save(fil.cnic_front.data, 'cnic_front', 'cf'+str(rollNo))
+                cnic_back = photo_save(fil.cnic_back.data, 'cnic_back', 'cb'+str(rollNo))
                 user = User(s_name=form.user_name.data, f_name=form.father_name.data, dob=datetime.datetime.strptime(str(form.dob.data), '%Y-%m-%d'), c_nic=form.cnic.data, gender=form.gender.data, status='new', roll_no=rollNo, password=rollNo, pp_no=form.personal_no.data, parent_no=form.parent_no.data, email=form.email.data,
                             address=form.address.data, degree=form.degree.data, semester=form.semester.data, institute=form.institute.data, marks=form.marks.data, start_year=int(form.start_year.data), end_year=int(form.end_year.data), image_file=pic_file, cnic_front=cnic_front, cnic_back=cnic_back)
                 db.session.add(user)
@@ -453,8 +456,8 @@ def register():
                 
                 db.session.commit()
 
-                flash(f'Adccount has been created!', 'success')
-                return redirect(url_for('home'))
+                flash(f'Account has been created!', 'success')
+                return f'<h1>Welcome {user.s_name}!<br /> Your Request has been Pending.<br />Please wait for confirmation<br/>We will inform you through your gmail account.</h1>'
 
     return render_template('registration.html', form=form)
 

@@ -1,6 +1,6 @@
 {% extends "layout.html" %} {% block content %}
 
-<div class="jumbotron text-center">
+<div class="jumbotron text-center bg-light">
   <div class="container-fluid">
     <div class="row">
       <div class="col">
@@ -87,7 +87,7 @@
   </div> 
 </div>
 
-<div class="container">
+<div class="container ">
   <div class="row justify-content-center">
     <ul class="nav nav-tabs">
       <li class="nav-item">
@@ -247,7 +247,7 @@
               {% else %} {{enroll_form.total_fee(class='form-control
               form-control-lg inability' , disabled=True )}} {% endif %}
             </div>
-            <div class="form-group">
+            <div class="form-group mt-3 text-right">
               {{enroll_form.submit(class='btn btn-primary')}}
             </div>
           </form>
@@ -262,7 +262,10 @@
       <form method="post" action="">
         {{ pass_form.csrf_token }}
         <div class="form-group row">
-          {{ pass_form.old_password.label(class='form-control-label') }}
+          <div class="col-sm-2">
+
+            {{ pass_form.old_password.label(class='form-control-label') }}
+          </div>
           <div class="col-sm-10">
             {{ pass_form.old_password(class="form-control") }} {% if
             pass_form.old_password.errors %}
@@ -276,7 +279,9 @@
           </div>
         </div>
         <div class="form-group row">
+          <div class="col-sm-2">
           {{ pass_form.new_password.label(class='form-control-label') }}
+        </div>
           <div class="col-sm-10">
             {{ pass_form.new_password(class="form-control") }} {% if
             pass_form.new_password.errors %}
@@ -290,7 +295,9 @@
           </div>
         </div>
         <div class="form-group row">
+          <div class="col-sm-2">
           {{ pass_form.reenter_password.label(class='form-control-label') }}
+        </div>
           <div class="col-sm-10">
             {{ pass_form.reenter_password(class="form-control") }} {% if
             pass_form.reenter_password.errors %}
@@ -304,7 +311,7 @@
           </div>
         </div>
 
-        <div class="form-group text-right mr-5">
+        <div class="form-group text-right">
           {{ pass_form.submit(class='btn btn-primary') }}
         </div>
       </form>
