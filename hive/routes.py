@@ -571,7 +571,7 @@ def cancel():
 
     db.session.delete(user)
     msg = Message('HiveTechnology',
-                  sender="bestabaidullahbutt@gmail.com", recipients=[user.email])
+                  sender="hivetechnologies8@gmail.com", recipients=[user.email])
     msg.body = f''' {request.form["canceled_mail"]} '''
     mail.send(msg)
     db.session.commit()
@@ -586,7 +586,7 @@ def enroll_approve():
         id=int(request.form['enroll_id'])).first()
     enroll. paid_installments = 0
     db.session.add(enroll)
-    msg = Message('HiveTechnology', sender="bestabaidullahbutt@gmail.com",
+    msg = Message('HiveTechnology', sender="hivetechnologies8@gmail.com",
                   recipients=[enroll.user.email])
     msg.body = f''' {request.form["enroll_approve_mail"]} <br /> Roll No: {enroll.user.roll_no} '''
     mail.send(msg)
@@ -602,7 +602,7 @@ def enroll_cancel():
     enroll = Enrollments.query.filter_by(
         id=int(request.form['enroll_id'])).first()
     db.session.delete(enroll)
-    msg = Message('HiveTechnology', sender="bestabaidullahbutt@gmail.com",
+    msg = Message('HiveTechnology', sender="hivetechnologies8@gmail.com",
                   recipients=[enroll.user.email])
     msg.body = f'''{request.form["enroll_cancel_mail"]}'''
     mail.send(msg)
