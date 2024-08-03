@@ -1,6 +1,6 @@
-# FYP Project - Women-Centric Web Application
+# Registration of Students for Institute Web Application
 
-Welcome to the FYP Project! This web application is designed to provide a seamless and user-friendly experience for women. Built with Flask, Python, and Bootstrap, the application includes features such as user registration, profile management, and more.
+This web application is designed to provide a seamless and user-friendly experience for students. Built with Flask, Python, and Bootstrap, the application includes features such as user registration, profile management, and more.
 
 ## Features
 
